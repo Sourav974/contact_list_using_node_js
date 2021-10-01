@@ -41,9 +41,21 @@ var contactList = [
 ];
 
 app.get("/", function (req, res) {
-  return res.render("home", {
-    title: "my contacts list",
-    contact_list: contactList,
+  // return res.render("home", {
+  //   title: "my contacts list",
+  //   contact_list: contactList,
+  // });
+
+  Contact.find({}, function (err, contacts) {
+    if (err) {
+      console.log("Error in fetching contacts from db");
+      return;
+    }
+
+    return res.render("home", {
+      title: "Contacts List",
+      contact_list: contacts,
+    });
   });
 });
 
@@ -59,8 +71,25 @@ app.post("/create-contact", function (req, res) {
   //   name:req.body.name,
   //   phone:req.body.phone
   // });
-  contactList.push(req.body);
-  return res.redirect("/");
+  // contactList.push(req.body);
+
+  Contact.create(
+    {
+      name: req.body.name,
+      phone: req.body.phone,
+    },
+    function (err, newContact) {
+      if (err) {
+        console.log("error in creating a contact!!");
+        return;
+      }
+
+      console.log("*************", newContact);
+      return res.redirect("back");
+    }
+  );
+
+  // return res.redirect("/");
 });
 
 app.get("/delete-contact/", function (req, res) {
