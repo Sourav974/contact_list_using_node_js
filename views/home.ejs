@@ -1,6 +1,7 @@
 <html>
   <head>
     <title><%= title %></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script
       src="https://kit.fontawesome.com/68587175f5.js"
       crossorigin="anonymous"
@@ -22,7 +23,7 @@
         </div>
       </div>
       <div class="delete-botton">
-        <a href="/delete-contact/?phone=<%= i.phone %>">
+        <a href="/delete-contact/?id=<%= i._id %>">
         <i class="fas fa-window-close">delete</i></a>
       </div>
 
@@ -35,6 +36,7 @@
       <input type="number" name="phone" placeholder="Enter Phone" required />
       <button type="submit">ADD CONTACT</button>
     </form>
+    
     <script type="text/javascript" src="/js/home.js"></script>
   </body>
 </html>

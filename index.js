@@ -93,15 +93,26 @@ app.post("/create-contact", function (req, res) {
 });
 
 app.get("/delete-contact/", function (req, res) {
-  console.log(req.query);
-  let phone = req.query.phone;
+  // console.log(req.query);
 
-  let contactIndex = contactList.findIndex((contact) => contact.phone == phone);
+  // get the id from query in the ul
 
-  if (contactIndex != -1) {
-    contactList.splice(contactIndex, 1); ///splice means to delete one index value  using splice we can put the next index value of deleting index
-  }
-  return res.redirect("back");
+  let id = req.query.id;
+
+  // find the contact in the database using id and delete
+
+  // let contactIndex = contactList.findIndex((contact) => contact.phone == phone);
+
+  // find the contact in the databse
+
+  Contact.findByIdAndDelete(id, function (err) {
+    if (err) {
+      console.log("Error in deleting the object in DB ");
+      return;
+    }
+
+    return res.redirect("back");
+  });
 });
 
 app.listen(port, function (err) {
